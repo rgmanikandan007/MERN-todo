@@ -9,10 +9,11 @@ const Main = () => {
     .then(result => console.log(result))
     .catch(err => console.log(err))
   }
+  
   return (
     <div className='main-container'>
         <input type='text' placeholder='Please Enter' onChange={(e)=> setTask(e.target.value)} />
-        <button type='submit' onClick={handleAdd}>Add</button>
+        <button type='submit' onClick={handleAdd()}>Add</button>
     </div>
   )
 }
