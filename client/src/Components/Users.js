@@ -41,7 +41,7 @@ const Users = () => {
                     <td>{user.email}</td>
                     <td>{user.age}</td>
                     <td>
-                      <Link to={`/update/${user._id}`}>Update</Link>
+                      <Link to={`/update/${user._id}`}>Edit</Link>
                       <button onClick={(e)=> handleDelete(user._id)}>Delete</button>
                     </td>
                   </tr>
