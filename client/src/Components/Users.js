@@ -1,16 +1,22 @@
-import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const Users = () => {
-  const [user, setUser] = useState([{
-    name: "Mani",
-    email: "mani@gmail.com",
-    age: 24
-  }])
+  const [user, setUser] = useState([])
 
-  const navigate = useNavigate()
-  const handleUpdate = () => {
-    navigate('/update')
+  useEffect(()=>{
+    axios.get('http://localhost:3001')
+    .then(result => setUser(result.data))
+    .catch(err => console.log(err)) 
+  },[])
+
+  const handleDelete = (id) => {
+    axios.delete("http://localhost:3001/deleteUser/" + id)
+    .then(res => {console.log(res)
+      window.location.reload()
+    })
+    .catch(err => console.log(err))
   }
 
   return (
@@ -35,8 +41,8 @@ const Users = () => {
                     <td>{user.email}</td>
                     <td>{user.age}</td>
                     <td>
-                      <button onClick={handleUpdate}>Update</button>
-                      <button>Delete</button>
+                      <Link to={`/update/${user._id}`}>Update</Link>
+                      <button onClick={(e)=> handleDelete(user._id)}>Delete</button>
                     </td>
                   </tr>
                 })
